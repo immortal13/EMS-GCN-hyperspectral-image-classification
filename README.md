@@ -32,5 +32,7 @@ If you find this work interesting in your research, please kindly cite:
 ```
 Thank you very much! (*^▽^*)
 
-Or if you have any questions, please feel free to contact me (Jiaqi Zou, immortal@whu.edu.cn).
+This code is constructed based on [ESCNet](https://github.com/Bobholamovic/ESCNet) and [CEGCN](https://github.com/qichaoliu/CNN_Enhanced_GCN), thanks~💕.
+
+If you have any questions, please feel free to contact me (Jiaqi Zou, immortal@whu.edu.cn).
 
