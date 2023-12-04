@@ -185,6 +185,21 @@ for (FLAG, train_samples_per_class,superpixel_scale) in [(args.data,args.tr,args
             output, Q, ops, H = net(net_input)
             ## CE loss
             loss = compute_loss(output,train_samples_gt_onehot,train_label_mask)
+            ## reconstruction loss        
+            R = train_samples_gt_onehot_
+            spf_R = ops['map_p2sp'](R.float().contiguous(), Q)            
+            R_recon = ops['map_sp2p'](spf_R, Q)
+            R_recon_label = R_recon[0].permute(1,2,0).reshape(-1,output.shape[-1]).float()
+            R_recon_label = F.softmax(R_recon_label, -1)            
+            recon_loss = compute_loss(R_recon_label, train_samples_gt_onehot, train_label_mask)#reconstruct_loss(R_recon, R) #torch.Size([1, 16, 145, 145])
+            ## compact loss  
+            spf_x = ops['map_p2sp'](coords, Q)
+            spixel_map = ops['smear'](spf_x, H.detach())
+            cpt_loss = compact_loss(spixel_map, coords) #torch.Size([1, 2, 145, 145])
+            lamada1 = 0.01
+            lamada2 = 0.0001
+            loss = loss+lamada1*recon_loss+lamada2*cpt_loss
+            
             loss.backward(retain_graph=False)
             optimizer.step()  
 
