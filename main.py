@@ -196,8 +196,8 @@ for (FLAG, train_samples_per_class,superpixel_scale) in [(args.data,args.tr,args
             spf_x = ops['map_p2sp'](coords, Q)
             spixel_map = ops['smear'](spf_x, H.detach())
             cpt_loss = compact_loss(spixel_map, coords) #torch.Size([1, 2, 145, 145])
-            lamada1 = 0.01
-            lamada2 = 0.0001
+            lamada1 = 0.1
+            lamada2 = 0.001
             loss = loss+lamada1*recon_loss+lamada2*cpt_loss
             
             loss.backward(retain_graph=False)
