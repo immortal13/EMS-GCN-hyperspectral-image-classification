@@ -1,5 +1,5 @@
 # EMS-GCN-hyperspectral-image-classification
-Demo code of "EMS-GCN: An End-to-End Mixhop Superpixel-Based Graph Convolutional Network for Hyperspectral Image Classification"
+Demo code of ["EMS-GCN: An End-to-End Mixhop Superpixel-Based Graph Convolutional Network for Hyperspectral Image Classification"](https://ieeexplore.ieee.org/document/9745164)
 
 ## Step 1: compiling cuda files
 ```
